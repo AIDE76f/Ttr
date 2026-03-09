@@ -1,4 +1,4 @@
--- Advanced ESP Script
+
 
 local Players = game:GetService("Players")
 local RunService = game:GetService("RunService")
@@ -21,8 +21,8 @@ function ESP:Add(player)
         highlight.FillColor = Color3.fromRGB(255,0,0)
         highlight.OutlineColor = Color3.fromRGB(255,255,255)
         highlight.Parent = character
-
-        -- Name + Distance GUI
+        
+        
         local head = character:WaitForChild("Head")
 
         local billboard = Instance.new("BillboardGui")
@@ -42,16 +42,10 @@ function ESP:Add(player)
         label.Parent = billboard
 
         RunService.RenderStepped:Connect(function()
-
             if player.Character and player.Character:FindFirstChild("HumanoidRootPart") then
-
-                local distance = (LocalPlayer.Character.HumanoidRootPart.Position -
-                    player.Character.HumanoidRootPart.Position).Magnitude
-
-                label.Text = player.Name.." | "..math.floor(distance).."m"
-
+                local distance = (LocalPlayer.Character.HumanoidRootPart.Position - player.Character.HumanoidRootPart.Position).Magnitude
+                label.Text = player.Name .. " | " .. math.floor(distance) .. "m"
             end
-
         end)
 
     end
@@ -65,12 +59,11 @@ function ESP:Add(player)
 end
 
 
--- تطبيق ESP على اللاعبين
-for _,player in pairs(Players:GetPlayers()) do
+
+for _, player in pairs(Players:GetPlayers()) do
     ESP:Add(player)
 end
 
--- تطبيق على اللاعبين الجدد
 Players.PlayerAdded:Connect(function(player)
     ESP:Add(player)
 end)
